@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '青岛信易贷平台分析大屏',
+  title: 'V3TsDemo',
 
   /**
    * @type {boolean} true | false
