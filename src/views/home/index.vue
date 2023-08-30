@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-const number = ref<number>(0)
+import useDemo from '@/store/demoStore/index'
+const counterStore = useDemo()
 </script>
 
 <template>
-  <div> {{ number }}</div>
+  <div> {{ counterStore.count }}</div>
 </template>
 
 <style lang="scss" scope>
