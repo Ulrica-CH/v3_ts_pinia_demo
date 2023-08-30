@@ -1,0 +1,72 @@
+// {
+//   "compilerOptions": {
+//     "noImplicitAny": false,
+//     "target": "esnext",
+//     "module": "esnext",
+//     "strict": true,
+//     "jsx": "preserve",
+//     "importHelpers": true,
+//     "moduleResolution": "node",
+//     "experimentalDecorators": true,
+//     "esModuleInterop": true,
+//     "allowSyntheticDefaultImports": true,
+//     "sourceMap": true,
+//     "baseUrl": ".",
+//     "types": ["webpack-env"],
+//     "paths": {
+//       "@/*": ["src/*"]  // -- 配置简短别名
+//     },
+//     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+//   },
+//   "include": [
+//     "src/**/*.ts",
+//     "src/**/*.tsx",
+//     "src/**/*.vue",
+//     "tests/**/*.ts",
+//     "tests/**/*.tsx",
+//     "examples/**/*.ts",  //-- examples相关配置为项目特殊配置，可以不需要
+//     "examples/**/*.tsx",
+//     "examples/**/*.vue"
+//   ],
+//   "exclude": ["node_modules"]
+// }
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "types": [
+      "webpack-env"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

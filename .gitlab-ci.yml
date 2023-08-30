@@ -1,0 +1,59 @@
+stages:
+  - build
+  - deploy
+
+build_prod:
+  stage: build
+  script:
+    - pwd
+    - echo "Building prod"
+    - d=`date  '+%Y-%m-%d %H:%M'`
+    - sed -i "s/VUE_APP_VERSION_CODE=0/VUE_APP_VERSION_CODE=$CI_PIPELINE_ID/g" ./.env.production
+    - sed -i "s/VUE_APP_BUILD_DATE=''/VUE_APP_BUILD_DATE=$d/g" ./.env.production
+    #- npm cache clean --force
+    - npm install
+    - npm run build
+    - ls -la
+  artifacts:
+    paths:
+      - dist
+  only:
+    - master
+  tags:
+    - build
+deploy_jh_prod:
+  stage: deploy
+  script:
+    - echo "Deploy to prod server"
+    - git branch -a
+    - artifactPath='./dist/'
+    - artifactName='*'
+    - target_ip='192.168.152.112'
+    - target_workDir='/home/credit-v2/front-gov'
+    - UUID=$(cat /proc/sys/kernel/random/uuid)
+    - sshpass -p 111111 ssh root@$target_ip << 6eb88ebe-8a60-4a82-84c8-08536c92a73f
+    - cd $target_workDir
+    - cd ..
+    - rm -rf temp_$UUID
+    - mkdir temp_$UUID
+    - ls -la
+    - exit
+    - 6eb88ebe-8a60-4a82-84c8-08536c92a73f
+    - sshpass -p 111111 scp -r $artifactPath$artifactName root@$target_ip:$target_workDir/../temp_$UUID/
+    - sshpass -p 111111 ssh root@$target_ip << 6eb88ebe-8a60-4a82-84c8-08536c92a73f
+    - cd $target_workDir
+    - rm -rf *
+    - cp -r ../temp_$UUID/* .
+    - systemctl restart nginx
+    - cd ..
+    - rm -rf temp_$UUID
+    - ls -la
+    - exit
+    - 6eb88ebe-8a60-4a82-84c8-08536c92a73f
+  only:
+    - master
+  when: manual
+  environment:
+    name: prod
+    url: http://192.168.152.112/
+
