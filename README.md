@@ -1,1 +1,2 @@
-信易贷大屏
+Vue3 + TS + Pinia Demo
+Node14
